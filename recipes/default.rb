@@ -4,4 +4,4 @@
 #
 # Copyright:: 2018, Sven Mollinga, All Rights Reserved.
 
-include_recipe "chef-kubernetes::packages"
+include_recipe 'chef-kubernetes::packages'

@@ -4,8 +4,8 @@
 #
 # Copyright:: 2018, Sven Mollinga, All Rights Reserved.
 
-if node[:platform].include?("ubuntu")
-  if node[:platform_version].include?("18.04")
+if node[:platform].include?('ubuntu')
+  if node[:platform_version].include?('18.04')
     apt_repository 'kubernetes' do
       uri        'http://apt.kubernetes.io/'
       components ['main']
@@ -15,6 +15,10 @@ if node[:platform].include?("ubuntu")
   end
 end
 
-package "kubectl" do
+package 'kubectl' do
   action :install
+end
+
+service 'kubelet' do
+  action :enable
 end
