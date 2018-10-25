@@ -4,6 +4,8 @@
 #
 # Copyright:: 2018, Sven Mollinga, All Rights Reserved.
 
+node.default['auto_install'] = %w(docker-ce kubectl kubelet kubeadm)
+
 if node[:platform].include?('ubuntu')
   if node[:platform_version].include?('18.04')
     apt_repository 'kubernetes' do
@@ -20,16 +22,10 @@ if node[:platform].include?('ubuntu')
   end
 end
 
-package 'docker-ce' do
-  action :install
-end
-
-package 'kubectl' do
-  action :install
-end
-
-package 'kubelet' do
-  action :install
+node['auto_install'].each do |app|
+  package "#{app}" do
+    action :install
+  end
 end
 
 service 'kubelet' do
